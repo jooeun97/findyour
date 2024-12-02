@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family:  'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 20px;
+            padding: 0px;
+            background-color: #f8f8f8;
+            text-align: left;
+            }
+        
+        .top-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* 이미지 비율 유지 */
+            margin-bottom: 10px; /* 이미지와 그리드 간 간격 */
+        }
+
+        /* 전체 컨테이너 */
+        .container {
+            width: 95%;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        /* 타이틀 */
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        /* 이미지와 본문 컨테이너 */
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .content img {
+            width: 50%; /* 이미지 크기를 50%로 조정 */
+            height: auto;
+            
+        }
+        
+        .text {
+    
+            flex: 1;
+            line-height: 1.5;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .text p {
+            margin-bottom: 16px;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .footer button {
+            background-color: #0424e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .footer button:hover {
+            background-color: #ff0720;
+        }
+    </style>
+</head>
+<body>
+      <img src="image/title-image.png" alt="Find your favorite" class="top-image">
+    
+    <div class="container">
+        <div class="title">빅뱅, 마마에서 오랜만의 컴백! 그들의 존재감은 여전하다!</div>
+         <div class="content">
+             <img src="image/img4.png" alt="이미지 4">
+             <div class="text">
+                 <p>2024년, 드디어 그들이 돌아왔다! 빅뱅이 마마(MAMA)에서 오랜만에 컴백 무대를 선보였다는 소식에 많은 팬들이 한껏 들떠 있다. 팬이라면 누구나 기다려왔던 순간이 아닐 수 없다. 빅뱅은 단순한 아이돌 그룹이 아니라, K-pop의 역사를 함께 써온 전설적인 존재니까.</p>
+                 <p>그동안 여러 차례의 공백을 겪고, 멤버들이 각자의 길을 걸어왔지만, 빅뱅은 여전히 그들만의 독특한 매력과 에너지를 발산하며 돌아왔다. 특히 마마 무대에서의 컴백은 팬들에게 특별한 의미가 있다. 대형 시상식에서 오랜만에 다시 만난 빅뱅의 모습은, 그동안 그들을 기다렸던 이들에게 너무나도 감동적인 순간이었다.</p>
+                 <p>여전히 변함없이 강력한 무대 장악력과 특유의 카리스마를 뽐내는 그들을 보며, "이들이 돌아왔다"는 사실이 실감났다. 그들의 음악, 그들의 무대, 그들의 스타일은 여전히 독보적이다. 무엇보다 그들의 컴백이 반갑고 기쁜 이유는, 단순히 "오랜만에 돌아왔다"는 것에 그치지 않는다. 빅뱅은 언제나 시대의 흐름에 맞춰 새로운 변화를 주고, 그만의 색깔을 고수하면서도 여전히 전설적인 존재감을 유지하는 그룹이다.</p>
+                 <p>팬들에게 빅뱅은 단순히 음악을 넘어선 존재다. 그들의 노래와 무대는 팬들에게 큰 영향을 미쳤고, 그들의 컴백은 다시 한 번 그 시절을 떠올리게 한다. "거짓말", "판타스틱 베이비", "뱅뱅뱅" 등 그들이 만든 곡들은 여전히 많은 사람들의 플레이리스트에 남아있다. 그리고 그들의 음악은 여전히 시대를 초월해 사람들에게 큰 힘이 된다.</p>
+                 <p>오랜만에 펼친 무대에서 빅뱅은 그야말로 '그들만의 빅뱅'을 보여줬다. 그들의 스타일, 그들의 음악, 그들의 모습은 여전히 많은 팬들의 마음을 사로잡는다. 마마에서의 컴백은 단지 무대 하나로 끝나는 것이 아니라, 빅뱅이 여전히 K-pop의 정수를 대표하는 존재라는 것을 다시 한 번 각인시키는 순간이었다.</p>
+                 <p>이번 컴백을 통해 팬들과 또 다른 새로운 추억을 만들어가게 될 빅뱅. 그들의 존재감은 여전히 강력하고, 앞으로 어떤 새로운 음악과 무대를 보여줄지 기대가 된다. 빅뱅의 컴백이 많은 사람들에게 기쁨을 선사하는 것처럼, 그들의 음악과 무대가 앞으로도 계속해서 많은 이들에게 힘과 영감을 주길 바란다.</p>
+                
+             </div>
+                 
+                 
+    </div>
+    <div class="footer">
+        <button onclick="goHome()">Go HOME</button>
+    </div>
+
+    <script>
+        let startTime;
+
+        window.onload = () => {
+            startTime = new Date().getTime();
+        };
+
+        window.onbeforeunload = () => {
+            const endTime = new Date().getTime();
+            const duration = Math.floor((endTime - startTime) / 1000); // 초 단위
+            const imageId = parseInt(window.location.pathname.match(/\d+/)[0]);
+            const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
+
+            // 이미지 ID별 시간 누적 저장
+            imageData[imageId] = (imageData[imageId] || 0) + duration;
+            localStorage.setItem('imageData', JSON.stringify(imageData));
+        };
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

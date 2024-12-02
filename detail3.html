@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지 5</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family:  'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 20px;
+            padding: 0px;
+            background-color: #f8f8f8;
+            text-align: left;
+            overflow: hidden;
+            }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .top-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* 이미지 비율 유지 */
+            margin-bottom: 10px; /* 이미지와 그리드 간 간격 */
+        }
+
+        .image {
+            position: absolute; /* 절대 위치 지정 */
+            width: 300px; /* 이미지 크기 */
+            height: auto;
+            object-fit: cover; /* 이미지 비율 유지 */
+            opacity: 0.9; /* 투명도 설정 */
+            transition: transform 1s ease-in-out; /* 이동 애니메이션 */
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .footer button {
+            background-color: #0424e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .footer button:hover {
+            background-color: #ff0720;
+        }
+    </style>
+</head>
+<body>
+      <img src="image/title-image.png" alt="Find your favorite" class="top-image">
+     <div class="title">find your favorite doggie</div>
+    <div class="footer">
+        <button onclick="goHome()">Go HOME</button>
+    </div>
+
+    <script>
+        const numImages = 100; // 생성할 이미지 수
+        const imageList=[
+            "doggies/1.jpg", 
+            "doggies/2.jpg",
+            "doggies/3.jpg",
+            "doggies/4.jpg",
+            "doggies/5.jpg",
+            "doggies/6.jpg",
+            "doggies/7.jpg",
+            "doggies/8.jpg",
+            "doggies/9.jpg",
+            "doggies/10.jpg",
+            "doggies/11.jpg",
+            "doggies/12.jpg",
+            "doggies/13.jpg",
+            "doggies/14.jpg",
+            "doggies/15.jpg",
+            "doggies/16.jpg",
+            "doggies/17.jpg",
+            "doggies/18.jpg",
+            "doggies/19.jpg",
+            "doggies/20.jpg"
+        ];
+
+        function createRandomImage() {
+            const img = document.createElement('img');
+            // 랜덤 이미지 선택
+            const randomIndex = Math.floor(Math.random() * imageList.length);
+            img.src = imageList[randomIndex]; // 랜덤 이미지 설정
+
+            img.classList.add('image');
+
+            // 랜덤 위치 계산
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+
+            // 이미지 위치 설정
+            img.style.left = `${x}px`;
+            img.style.top = `${y}px`;
+
+            // 랜덤 회전 적용
+            const rotation = Math.random() * 360;
+            img.style.transform = `rotate(${rotation}deg)`;
+
+            // 이미지 추가
+            document.body.appendChild(img);
+
+            // 일정 시간 후 이미지 움직이기
+            setInterval(() => {
+                const newX = Math.random() * window.innerWidth;
+                const newY = Math.random() * window.innerHeight;
+                img.style.left = `${newX}px`;
+                img.style.top = `${newY}px`;
+            }, 1000);
+        }
+
+        // 여러 개의 이미지를 랜덤하게 배치
+        for (let i = 0; i < numImages; i++) {
+            createRandomImage();
+        }
+        let startTime;
+
+        window.onload = () => {
+            startTime = new Date().getTime();
+        };
+
+        window.onbeforeunload = () => {
+            const endTime = new Date().getTime();
+            const duration = Math.floor((endTime - startTime) / 1000); // 초 단위
+            const imageId = parseInt(window.location.pathname.match(/\d+/)[0]);
+            const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
+
+            // 이미지 ID별 시간 누적 저장
+            imageData[imageId] = (imageData[imageId] || 0) + duration;
+            localStorage.setItem('imageData', JSON.stringify(imageData));
+        };
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

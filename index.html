@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find your favorite</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            margin: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            background-color: transparent;
+            padding-top: 20px;
+            box-sizing: border-box;
+        }
+
+        .top-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        /* 첫 번째 줄 */
+        .grid-first {
+            display: inline-grid;
+            grid-template-columns: 70% 30%;
+            gap: 0px;
+            margin-top: 0px;
+            width: 100%;
+            height: auto%;
+            max-width: 2000px;
+            margin: 0 auto;
+        }
+
+        /* 두 번째 줄 (28.57%, 28.57%, 28.57%, 14.29%) */
+        .grid-second {
+            display: inline-grid;
+            grid-template-columns: 28.57% 28.57% 28.57% 14.29%;
+            gap: 0px;
+            margin-top: 0;
+            width: 100%;
+            max-width: 2000px;
+            margin: 0 auto;
+        }
+        
+        .grid-second > .item {
+            justify-content: center;
+            align-items: flex-start;  /* 아랫줄의 이미지들: 위로 정렬 */
+            height: 100%;  /* 아이템 높이 일치 */
+        }
+
+        .grid-first > .item {
+            align-items: flex-end;
+            height: auto;
+            width: 100%;/* 윗줄 이미지들: 아래로 정렬 */
+        }
+        
+        .item {
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 0px;
+            cursor: pointer;
+            transition: filter 0.3s ease;
+            overflow: hidden;
+            min-height: 200px;
+        }
+
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: saturate(1) brightness(1);
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer button {
+            background-color: #0424e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer button:hover {
+            background-color: #ff0720;
+        }
+
+        .logout-button {
+            margin-top: 20px;
+            background-color: #0424e3;
+        }
+
+        .logout-button:hover {
+            background-color: #ff0720;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="image/title-image.png" alt="Find your favorite" class="top-image">
+
+    <!-- 첫 번째 줄: 70% 30% -->
+    <div class="grid-first">
+        <div class="item" onclick="navigateToDetail(1)"><img src="image/img1.png" alt="이미지 1"></div>
+        <div class="item" onclick="navigateToDetail(2)"><img src="image/img2.png" alt="이미지 2"></div>
+    </div>
+
+    <!-- 두 번째 줄: 28.57%, 28.57%, 28.57%, 14.29% -->
+    <div class="grid-second">
+        <div class="item" onclick="navigateToDetail(3)"><img src="image/img3.png" alt="이미지 3"></div>
+        <div class="item" onclick="navigateToDetail(4)"><img src="image/img4.png" alt="이미지 4"></div>
+        <div class="item" onclick="navigateToDetail(5)"><img src="image/img5.png" alt="이미지 5"></div>
+        <div class="item" onclick="navigateToDetail(6)"><img src="image/img6.png" alt="이미지 6"></div>
+    </div>
+
+    <div class="footer">
+        <button onclick="goToResults()">Check My Result</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        const imageClicks = JSON.parse(localStorage.getItem('imageClicks')) || {};
+        const savedSaturation = JSON.parse(localStorage.getItem('imageSaturation')) || {};
+        const sessionLogs = JSON.parse(localStorage.getItem('sessionLogs')) || [];
+
+        // 이미지 채도값 적용
+        function adjustImageSaturation() {
+            const grid = document.querySelectorAll('.item img');
+            grid.forEach((img, index) => {
+                const clickCount = savedSaturation[index + 1] || 0;
+                const saturation = Math.max(1 - clickCount * 0.1, 0.0);
+                img.style.filter = `saturate(${saturation}) brightness(1)`;
+            });
+        }
+
+        // 상세 페이지로 이동
+        function navigateToDetail(imageId) {
+            imageClicks[imageId] = (imageClicks[imageId] || 0) + 1;
+            savedSaturation[imageId] = (savedSaturation[imageId] || 0) + 1;
+            localStorage.setItem('imageClicks', JSON.stringify(imageClicks));
+            localStorage.setItem('imageSaturation', JSON.stringify(savedSaturation));
+            window.location.href = `detail${imageId}.html`;
+        }
+
+        // 결과 페이지로 이동
+        function goToResults() {
+            window.location.href = 'results.html';
+        }
+
+        // 로그아웃
+        function logout() {
+            const timestamp = new Date().toISOString();
+            const sessionData = {
+                sessionID: `Session-${Date.now()}`,
+                timestamp: timestamp,
+                clicks: { ...imageClicks },
+                viewDurations: JSON.parse(localStorage.getItem('imageData')) || {},
+                saturationChanges: { ...savedSaturation }
+            };
+
+            sessionLogs.push(sessionData);  // 새 세션 로그를 추가
+            localStorage.setItem('sessionLogs', JSON.stringify(sessionLogs));  // 세션 기록을 로컬 스토리지에 저장
+
+            localStorage.removeItem('imageClicks');
+            localStorage.removeItem('imageData');
+            alert("로그아웃되었습니다. 세션 기록이 초기화되었습니다.");
+            window.location.href = 'start.html';  // 로그아웃 후 홈으로 이동
+        }
+
+
+        // 관리자 페이지 접근 (Ctrl + Shift + A)
+        window.addEventListener('keydown', (event) => {
+            if (event.ctrlKey && event.shiftKey && event.key === 'A') {
+                window.location.href = 'admin.html';
+            }
+        });
+
+        adjustImageSaturation();
+
+        // Z 키를 누르면 모든 이미지 채도값 초기화
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'z' || event.key === 'Z') {
+                resetSaturation();
+            }
+        });
+
+        // 채도 초기화 함수
+        function resetSaturation() {
+            const grid = document.querySelectorAll('.item img');
+            grid.forEach((img, index) => {
+                img.style.filter = 'saturate(1) brightness(1)';
+                savedSaturation[index + 1] = 0;
+            });
+            localStorage.setItem('imageSaturation', JSON.stringify(savedSaturation));
+            console.log('채도값이 초기화되었습니다.');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family:  'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 20px;
+            padding: 0px;
+            background-color: #f8f8f8;
+            text-align: left;
+            }
+        
+        .top-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* 이미지 비율 유지 */
+            margin-bottom: 10px; /* 이미지와 그리드 간 간격 */
+        }
+
+        /* 전체 컨테이너 */
+        .container {
+            width: 95%;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        /* 타이틀 */
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        /* 이미지와 본문 컨테이너 */
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .content img {
+            width: 30%; /* 이미지 크기를 50%로 조정 */
+            height: auto;
+            
+        }
+        
+        .text {
+    
+            flex: 1;
+            line-height: 1.5;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .text p {
+            margin-bottom: 16px;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .footer button {
+            background-color: #0424e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .footer button:hover {
+            background-color: #ff0720;
+        }
+    </style>
+</head>
+<body>
+      <img src="image/title-image.png" alt="Find your favorite" class="top-image">
+    
+    <div class="container">
+        <div class="title">
+        디즈니의 PC 정책, 문화를 파괴하는 위험한 실험</div>
+         <div class="content">
+             <img src="image/img6.png" alt="이미지 6">
+             <div class="text">
+                 <p>디즈니가 영화를 통해 사회적 이슈를 실험하고 있다고? 그게 바로 지금 벌어지고 있는 일이다. 메이저 영화에서 흑인 배우를 주인공으로 세운다든지, LGBTQ 커뮤니티의 목소리를 내는 캐릭터를 등장시키는 건, 단순한 '다양성'을 넘어, 우리의 전통과 문화적 정체성을 위협하는 위험한 시도에 불과하다.</p>
+                 <p>인어공주에서 아리엘을 흑인 배우로 캐스팅한 것은 그저 흑인 인권운동에 눈치를 보는 보여주기식 정치적 퍼포먼스일 뿐이다. 전통적인 캐릭터를 파괴하고, 우리가 사랑했던 그 마법의 세상을 모조리 깨버리는 이런 시도는, 단순히 영화를 즐기는 우리의 경험을 망치는 것에 그치지 않는다. 문화는 그 시대의 아이콘들이 만들어가는 것이다. 그런데 디즈니는 이 전통을 망가뜨리면서, 마치 모든 사람들이 같은 가치관을 공유해야 한다는 강요를 한다. 마치 우리가 흑인 아리엘을 보고 감동해야 한다는 것처럼!</p>
+                 <p>LGBTQ 캐릭터가 등장하는 것도 마찬가지다. 영화는 이제 더 이상 단순한 오락을 제공하지 않는다. LGBTQ의 '권리'와 '존엄'을 이야기하는 무대가 되어버린 것이다. 그저 좋은 스토리와 캐릭터를 보고 싶었는데, 이제는 반드시 "성소수자"가 등장해야만 한다는 강요를 느낀다. 이런 식의 정치적 올바름은 영화를 지루하고 상투적으로 만든다. 그것도 모자라, 이제는 모든 캐릭터가 성적 지향을 넘어서 정치적 메시지를 전달하는 도구가 되어버린다.</p>
+                 <p>디즈니의 이런 행보는 더 이상 창작의 자유가 아니라, 정치적 의도를 강요하는 행위일 뿐이다. 우리가 기대하는 건 전통적인 가치와 문화적 아이콘들이 아니라, 끝없는 정치적 실험의 장이 되어버린 영화들이다.</p>
+                
+             </div>
+                 
+                 
+    </div>
+    <div class="footer">
+        <button onclick="goHome()">Go HOME</button>
+    </div>
+
+    <script>
+        let startTime;
+
+        window.onload = () => {
+            startTime = new Date().getTime();
+        };
+
+        window.onbeforeunload = () => {
+            const endTime = new Date().getTime();
+            const duration = Math.floor((endTime - startTime) / 1000); // 초 단위
+            const imageId = parseInt(window.location.pathname.match(/\d+/)[0]);
+            const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
+
+            // 이미지 ID별 시간 누적 저장
+            imageData[imageId] = (imageData[imageId] || 0) + duration;
+            localStorage.setItem('imageData', JSON.stringify(imageData));
+        };
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

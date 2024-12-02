@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결과 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f3e6;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .top-image {
+            width: 95%;
+            height: auto;
+            object-fit: cover;
+            margin: 0px;
+            z-index: 1;
+        }
+        
+        #result-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지 비율을 유지하며 화면에 꽉 차게 설정 */
+            z-index: 0;  /* 결과 이미지가 top-image 뒤에 위치하도록 */
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            max-width: 90%;
+            width: 600px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .footer button {
+            background-color: #0424e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .footer button:hover {
+            background-color: #ff0720;
+        }
+        /* 이미지에 관련된 스타일 */
+        #result-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        #result-text h2, #result-text p {
+            color: #333;
+            margin: 0 0 10px;
+        }
+
+        #result-text img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <img src="image/title-image.png" alt="Find your favorite" class="top-image">
+    <div class="container" id="result-text">
+        <div class="footer">
+            <button onclick="goHome()">메인 페이지로 돌아가기</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = () => {
+            const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
+            const resultContainer = document.getElementById('result');
+            const resultImage = document.getElementById('result-image');
+
+            // 이미지별 시간 데이터를 배열로 정렬
+            const sortedData = Object.entries(imageData)
+                .map(([id, data]) => ({ id, time: data.totalTime }))
+                .sort((a, b) => b.time - a.time);
+
+            // 결과 처리
+            if (sortedData.length === 0 || sortedData.every(item => item.time === 0)) {
+                resultContainer.innerHTML = `
+                    <h2>분석 결과가 없습니다</h2>
+                    <p>이미지를 클릭하고 상세 내용을 보신 후 결과를 확인해 주세요!</p>
+                `;
+                resultImage.style.display = 'none';  // 이미지가 없을 때는 숨김
+            } else {
+                const mostViewed = sortedData[0]; // 가장 오래 본 이미지
+                const imageId = parseInt(mostViewed.id); // 이미지 ID
+                const timeSpent = mostViewed.time; // 해당 이미지에서 보낸 시간
+
+                // 이미지 ID별 분석 결과 데이터
+                const analysisResults = {
+                    1: {
+                        title: "분석 결과: 이미지 1",
+                        message: "이 이미지는 당신에게 특별한 호기심을 자극한 것 같습니다.",
+                        image: "results/result1.png"
+                    },
+                    2: {
+                        title: "분석 결과: 이미지 2",
+                        message: "이 이미지는 당신의 감각을 크게 끌어당겼습니다.",
+                        image: "results/resul2.png"
+                    },
+                    3: {
+                        title: "분석 결과: 이미지 3",
+                        message: "이 이미지는 색상과 구도가 특히 눈길을 사로잡았습니다.",
+                        image: "results/result3.png"
+                    },
+                    4: {
+                        title: "분석 결과: 이미지 4",
+                        message: "이 이미지는 당신의 상상력을 자극한 것 같네요!",
+                        image: "img/result12.png"
+                    }
+                };
+
+                // 분석 결과 데이터 가져오기
+                const result = analysisResults[imageId] || {
+                    title: "분석 결과 없음",
+                    message: "해당 이미지에 대한 추가 분석 정보가 없습니다.",
+                    image: ""
+                };
+
+                // 결과 표시
+                resultContainer.innerHTML = `
+                    <h2>${result.title}</h2>
+                    <p>${result.message}</p>
+                    <p>당신은 이 이미지를 ${timeSpent}초 동안 보았습니다.</p>
+                `;
+
+                // 결과 이미지 설정
+                resultImage.src = result.image;
+                resultImage.style.display = 'block';  // 이미지가 있을 때 표시
+            }
+        };
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family:  'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 20px;
+            padding: 0px;
+            background-color: #f8f8f8;
+            text-align: left;
+            }
+        
+        .top-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* 이미지 비율 유지 */
+            margin-bottom: 10px; /* 이미지와 그리드 간 간격 */
+        }
+
+        /* 전체 컨테이너 */
+        .container {
+            width: 95%;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        /* 타이틀 */
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        /* 이미지와 본문 컨테이너 */
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .content img {
+            width: 50%; /* 이미지 크기를 50%로 조정 */
+        
+            
+        }
+        
+        .text {
+    
+            flex: 1;
+            line-height: 1.5;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .text p {
+            margin-bottom: 16px;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .footer button {
+            background-color: #0424e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .footer button:hover {
+            background-color: #ff0720;
+        }
+    </style>
+</head>
+<body>
+      <img src="image/title-image.png" alt="Find your favorite" class="top-image">
+    
+    <div class="container">
+        <div class="title">해리스와 함께 사라진 평등의 희망</div>
+         <div class="content">
+             <img src="image/img2.png" alt="이미지 2">
+             <div class="text">
+                 <p>2024년은 잔인한 해로 기억될 것이다. 카멀라 해리스 부통령의 패배는 단순한 선거의 결과가 아니다. 그것은 우리가 이룩하려던 평등과 포용, 그리고 더 나은 세상을 향한 약속이 산산조각난 순간이다. 오늘, 우리는 더 나아간 세계를 꿈꾸며 걸었던 길의 끝에서 벽을 마주했다.</p>
+                 <p>이번 결과는 차별과 불공정이 다시금 지배하는 세상이 돌아왔음을 의미한다. 해리스가 상징했던 것은 단지 한 정치인이 아니었다. 그녀는 억압받던 이들의 목소리, 소외된 이들의 희망, 그리고 모두가 동등한 기회를 누릴 수 있는 세상을 향한 가능성이었다. 그러나 오늘, 그 모든 것이 처참히 무너졌다.</p>
+                 <p>우리가 다시 직면해야 할 현실은 가혹하다. 혜택 없는 다수의 고통이 다시 시작되고, 권력을 쥔 이들은 소수의 목소리를 외면할 것이다. 해리스의 패배는 그저 한 후보의 패배가 아니다. 그것은 여성들이 수십 년간 쌓아온 성취와 성평등을 향한 모든 노력의 후퇴를 의미한다.</p>
+                 <p>그녀의 리더십 아래 우리는 진정으로 다양한 세상을 꿈꿀 수 있었다. 성별, 인종, 계층을 넘어 모두가 공정하게 인정받을 수 있는 세상이 가능하다는 믿음이 있었다. 하지만 그 믿음은 이제 짓밟혔다. 다시 남성 중심의 권력 구조와 배타적인 시스템이 힘을 얻었다.</p>
+                 <p>이번 결과로 인해 가장 큰 타격을 받는 것은 미래다. 다음 세대는 이제 어떤 희망을 가지고 자라야 하는가? 평등이 패배한 세상에서, 더 나은 세상을 만들려던 노력은 어떻게 기억될 것인가? 해리스의 비전은 더 이상 정책으로 실현되지 못할 것이다. 우리는 다시 어둠 속으로 밀려났다.</p>
+                 <p>오늘 우리는 잃어버린 기회를 슬퍼한다. 우리의 꿈은 빼앗겼고, 포용의 목소리는 묵살되었다. 그러나 이 패배가 끝은 아니다. 우리는 다시 일어설 것이다. 언젠가 평등과 정의는 다시금 승리할 것이다.</p>
+             </div>
+                 
+                 
+    </div>
+    <div class="footer">
+        <button onclick="goHome()">Go HOME</button>
+    </div>
+
+    <script>
+        let startTime;
+
+        window.onload = () => {
+            startTime = new Date().getTime();
+        };
+
+        window.onbeforeunload = () => {
+            const endTime = new Date().getTime();
+            const duration = Math.floor((endTime - startTime) / 1000); // 초 단위
+            const imageId = parseInt(window.location.pathname.match(/\d+/)[0]);
+            const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
+
+            // 이미지 ID별 시간 누적 저장
+            imageData[imageId] = (imageData[imageId] || 0) + duration;
+            localStorage.setItem('imageData', JSON.stringify(imageData));
+        };
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

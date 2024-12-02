@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family:  'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 20px;
+            padding: 0px;
+            background-color: #f8f8f8;
+            text-align: left;
+            }
+        
+        .top-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* 이미지 비율 유지 */
+            margin-bottom: 10px; /* 이미지와 그리드 간 간격 */
+        }
+
+        /* 전체 컨테이너 */
+        .container {
+            width: 95%;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        /* 타이틀 */
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        /* 이미지와 본문 컨테이너 */
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .content img {
+            width: 50%; /* 이미지 크기를 50%로 조정 */
+            height: auto;
+            
+        }
+        
+        .text {
+    
+            flex: 1;
+            line-height: 1.5;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .text p {
+            margin-bottom: 16px;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .footer button {
+            background-color: #0424e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .footer button:hover {
+            background-color: #ff0720;
+        }
+    </style>
+</head>
+<body>
+      <img src="image/title-image.png" alt="Find your favorite" class="top-image">
+    
+    <div class="container">
+        <div class="title">
+        위키드가 전하는 공감과 변화의 마법</div>
+         <div class="content">
+             <img src="image/img5.png" alt="이미지 5">
+             <div class="text">
+                 <p>뮤지컬로 전 세계의 사랑을 받았던 위키드가 마침내 영화로 찾아왔다. 이 작품은 단순히 무대를 스크린으로 옮긴 것이 아니라, 한층 더 깊어진 이야기와 감각적인 비주얼로 새로운 감동을 선사한다. 특히, 정치적 올바름(PC)과 소수자 감성의 메시지가 영화라는 매체를 통해 더욱 강렬하게 다가온다.</p>
+                 <p>초록 피부를 가진 엘파바는 여전히 타인에게 배척당하고 오해받는 인물이다. 하지만 영화는 그녀의 이야기를 통해 우리 모두가 갖고 있는 편견과 선입견을 정면으로 마주하게 만든다. 엘파바는 단순히 마녀가 아닌, 불평등한 사회 구조 속에서 목소리를 내고자 하는 모든 이들의 상징이다. 영화는 이 캐릭터를 통해 "다름"에 대한 진정한 공감과 연대의 메시지를 전한다.</p>
+                 <p>무엇보다도, 엘파바와 글린다의 복잡하면서도 아름다운 관계는 이번 영화에서 한층 더 심도 있게 그려진다. 서로 다른 배경과 성격을 가진 두 사람이 충돌하고 화해하며 성장해가는 과정은, 우리가 살아가는 세상 속에서 다양성을 어떻게 받아들여야 하는지를 섬세하게 보여준다. 특히, 두 사람이 함께 부르는 음악은 그 자체로 가슴 깊은 울림을 준다.</p>
+                 <p>영화 위키드는 단순히 뮤지컬의 팬들에게만 즐거움을 주는 작품이 아니다. 그것은 우리가 가진 고정관념을 뒤흔들고, 나와 다른 사람을 이해하고자 하는 마음을 선사하는 작품이다.  스크린 위에서 펼쳐지는 이야기는 더 넓은 관객들에게 공감을 불러일으키며, 새로운 문화적 전환점이 될 것이다. 이 영화를 보며 느낀 감동은 오랫동안 우리 마음속에 남아 있을 것이다.</p>
+                
+             </div>
+                 
+                 
+    </div>
+    <div class="footer">
+        <button onclick="goHome()">Go HOME</button>
+    </div>
+
+    <script>
+        let startTime;
+
+        window.onload = () => {
+            startTime = new Date().getTime();
+        };
+
+        window.onbeforeunload = () => {
+            const endTime = new Date().getTime();
+            const duration = Math.floor((endTime - startTime) / 1000); // 초 단위
+            const imageId = parseInt(window.location.pathname.match(/\d+/)[0]);
+            const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
+
+            // 이미지 ID별 시간 누적 저장
+            imageData[imageId] = (imageData[imageId] || 0) + duration;
+            localStorage.setItem('imageData', JSON.stringify(imageData));
+        };
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>
