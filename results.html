@@ -20,7 +20,7 @@
 
         #result-image {
             position: fixed;
-            top:0;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
@@ -54,38 +54,38 @@
 <body>
     <img src="image/title-image.png" alt="Find your favorite" class="top-image">
     <img id="result-image" alt="결과 이미지">
-    <a href="index.html" class="button">Go HOME</a> 
+    <div class="footer">
+        <button onclick="goHome()">메인 페이지로 돌아가기</button>
+    </div>
     <script>
         window.onload = () => {
             const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
-            const resultContainer = document.getElementById('result');
-
+            
             // 이미지별 시간 데이터를 배열로 정렬
             const sortedData = Object.entries(imageData)
                 .map(([id, data]) => ({ id, time: data.totalTime }))
                 .sort((a, b) => b.time - a.time);
 
-            // 결과 처리
             if (sortedData.length === 0 || sortedData.every(item => item.time === 0)) {
-                resultContainer.innerHTML = `
-                    <h2>분석 결과가 없습니다</h2>
-                    <p>이미지를 클릭하고 상세 내용을 보신 후 결과를 확인해 주세요!</p>
-                `;
-                document.body.style.backgroundColor = "#f8f8f8"; // 기본 배경색
-                
-            } else {
-                const mostViewed = sortedData[0]; // 가장 오래 본 이미지
-                const imageId = mostViewed ? parseInt(mostViewed.id, 10) : null; //숫자로 변환
-                
-                // 결과 이미지 설정
+                alert("분석 결과가 없습니다. 이미지를 클릭하고 다시 확인해보세요.");
+                return;
+            }
+
+            const mostViewed = sortedData[0];
+            const imageId = mostViewed ? parseInt(mostViewed.id, 10) : null;
             const resultImage = document.getElementById('result-image');
+
             if (imageId) {
                 resultImage.src = `results/result${imageId}.png`; // 결과 이미지 경로 설정
+                resultImage.alt = `Result Image ${imageId}`;
             } else {
-                resultImage.alt = "결과를 찾을 수 없습니다.";
-            } 
-
+                alert("결과 이미지가 없습니다.");
+            }
         };
+
+        function goHome() {
+            window.location.href = './index.html'; // index.html의 경로를 확인하세요
+        }
     </script>
 </body>
 </html>
