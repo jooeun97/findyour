@@ -54,7 +54,9 @@
 <body>
     <img src="image/title-image.png" alt="Find your favorite" class="top-image">
     <img id="result-image" alt="결과 이미지">
-
+    <div class="footer">
+            <button onclick="goHome()">메인 페이지로 돌아가기</button>
+        </div>
     <script>
         window.onload = () => {
             const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
