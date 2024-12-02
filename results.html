@@ -54,9 +54,7 @@
 <body>
     <img src="image/title-image.png" alt="Find your favorite" class="top-image">
     <img id="result-image" alt="결과 이미지">
-    <div class="footer">
-            <button onclick="goHome()">Go HOME</button>
-        </div>
+    <a href="index.html" class="button">Go HOME</a> 
     <script>
         window.onload = () => {
             const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
