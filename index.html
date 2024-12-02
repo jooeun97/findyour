@@ -30,7 +30,7 @@
         /* 첫 번째 줄 */
         .grid-first {
             display: inline-grid;
-            grid-template-columns: 70% 30%;
+            grid-template-columns: 33% 33% 33%;
             gap: 0px;
             margin-top: 0px;
             width: 100%;
@@ -42,7 +42,7 @@
         /* 두 번째 줄 (28.57%, 28.57%, 28.57%, 14.29%) */
         .grid-second {
             display: inline-grid;
-            grid-template-columns: 28.57% 28.57% 28.57% 14.29%;
+            grid-template-columns: 33% 33% 33%;
             gap: 0px;
             margin-top: 0;
             width: 100%;
@@ -128,11 +128,11 @@
     <div class="grid-first">
         <div class="item" onclick="navigateToDetail(1)"><img src="image/img1.png" alt="이미지 1"></div>
         <div class="item" onclick="navigateToDetail(2)"><img src="image/img2.png" alt="이미지 2"></div>
+        <div class="item" onclick="navigateToDetail(3)"><img src="image/img3.png" alt="이미지 3"></div>
     </div>
 
     <!-- 두 번째 줄: 28.57%, 28.57%, 28.57%, 14.29% -->
     <div class="grid-second">
-        <div class="item" onclick="navigateToDetail(3)"><img src="image/img3.png" alt="이미지 3"></div>
         <div class="item" onclick="navigateToDetail(4)"><img src="image/img4.png" alt="이미지 4"></div>
         <div class="item" onclick="navigateToDetail(5)"><img src="image/img5.png" alt="이미지 5"></div>
         <div class="item" onclick="navigateToDetail(6)"><img src="image/img6.png" alt="이미지 6"></div>
