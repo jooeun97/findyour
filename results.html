@@ -17,6 +17,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease; /* 배경색과 텍스트 색 전환 효과 */
         }
         
         .top-image {
@@ -27,15 +28,6 @@
             z-index: 1;
         }
         
-        #result-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 이미지 비율을 유지하며 화면에 꽉 차게 설정 */
-            z-index: 0;  /* 결과 이미지가 top-image 뒤에 위치하도록 */
-        }
 
         .container {
             position: absolute;
@@ -72,22 +64,6 @@
         .footer button:hover {
             background-color: #ff0720;
         }
-        /* 이미지에 관련된 스타일 */
-        #result-text {
-            position: relative;
-            z-index: 2;
-        }
-
-        #result-text h2, #result-text p {
-            color: #333;
-            margin: 0 0 10px;
-        }
-
-        #result-text img {
-            max-width: 100%;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -102,7 +78,6 @@
         window.onload = () => {
             const imageData = JSON.parse(localStorage.getItem('imageData')) || {};
             const resultContainer = document.getElementById('result');
-            const resultImage = document.getElementById('result-image');
 
             // 이미지별 시간 데이터를 배열로 정렬
             const sortedData = Object.entries(imageData)
@@ -115,7 +90,8 @@
                     <h2>분석 결과가 없습니다</h2>
                     <p>이미지를 클릭하고 상세 내용을 보신 후 결과를 확인해 주세요!</p>
                 `;
-                resultImage.style.display = 'none';  // 이미지가 없을 때는 숨김
+                document.body.style.backgroundColor = "#f8f8f8"; // 기본 배경색
+                
             } else {
                 const mostViewed = sortedData[0]; // 가장 오래 본 이미지
                 const imageId = parseInt(mostViewed.id); // 이미지 ID
@@ -131,7 +107,7 @@
                     2: {
                         title: "분석 결과: 이미지 2",
                         message: "이 이미지는 당신의 감각을 크게 끌어당겼습니다.",
-                        image: "results/resul2.png"
+                        image: "results/resutl2.png"
                     },
                     3: {
                         title: "분석 결과: 이미지 3",
@@ -141,7 +117,12 @@
                     4: {
                         title: "분석 결과: 이미지 4",
                         message: "이 이미지는 당신의 상상력을 자극한 것 같네요!",
-                        image: "img/result12.png"
+                        image: "results/result4.png"
+                    }
+                    5: {
+                        title: "분석 결과: 이미지 5",
+                        message: "이 이미지는 당신의 상상력을 자극한 것 같네요!",
+                        image: "results/result5.png"
                     }
                 };
 
@@ -149,7 +130,9 @@
                 const result = analysisResults[imageId] || {
                     title: "분석 결과 없음",
                     message: "해당 이미지에 대한 추가 분석 정보가 없습니다.",
-                    image: ""
+                    image: "",
+                    background: "#f8f8f8";,
+                    textColor: "#333'
                 };
 
                 // 결과 표시
@@ -157,11 +140,12 @@
                     <h2>${result.title}</h2>
                     <p>${result.message}</p>
                     <p>당신은 이 이미지를 ${timeSpent}초 동안 보았습니다.</p>
+                    <img src='results/result$(imageId} alt="분석 이미지" style="max-width: 100%; border-radius: 5px;">
                 `;
 
-                // 결과 이미지 설정
-                resultImage.src = result.image;
-                resultImage.style.display = 'block';  // 이미지가 있을 때 표시
+                // 페이지 스타일 업데이트
+                document.body.style.backgroundColor = result.background;
+                document.body.style.color = result.textColor;
             }
         };
 
